@@ -1,0 +1,200 @@
+openapi: 3.0.0
+info:
+  title: Travel API
+  description: This is an api to go through all trips in the traveltool
+  contact:
+    name: Travel API
+    email: traveltool@gmail.com
+  version: 1.0.0
+servers: 
+    - url: http://traveltool.com
+    - url: http://test.com
+tags:
+  - name: Travel
+    description: Everything about your trips   
+paths:
+  /trips:
+    description: To display all trips
+    get:
+      description: To get all trips in the Trip list!
+      responses:
+        "200":
+          description: Success Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Array-of-trips'
+        "404":
+          description: Not found!
+  /admin:
+    description: To display admin information
+    get:
+      responses:
+        "200":
+          description: Success Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Array-of-trips'
+        "404":
+          description: Not found!
+  /trip:      
+    post:
+      description: Adding a new trip
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/object-trips'
+      responses:
+        "200":
+          description: Trip added successfully!
+        "405":
+          description: Invalid Input!
+  /trip/{id}:
+    description: A specific trip by ID 
+    get:
+      description: To get a trip by ID 
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 12
+      responses:
+        "200":
+          description: Success Request 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Array-of-trips'
+        "404":
+          description: Not found!
+    
+    put:
+      description: To update a trip by ID 
+      parameters: 
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 12
+      responses:
+        "200":
+          description: Success Request 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/object-trips'
+        "404":
+          description:  Trip Not found!
+    
+    delete: 
+        description: delete a specific trip
+        parameters: 
+          - name: id 
+            in: path
+            required: true
+            schema: 
+              type: integer
+              example: 12 
+        responses: 
+          "200": 
+            description: Sucess Request
+            content: 
+              application/json:
+                schema: 
+                    $ref: '#/components/schemas/object-trips'
+          "404" :
+            description: data not found
+            
+
+                 
+          
+        
+      
+                      
+          
+
+components:
+  schemas:
+    Array-of-trips:
+      type: array
+      items:
+        properties:
+          TripID:
+            type: integer
+            example: 123
+          Trip_description: 
+            type: string
+            example: hello this trip is one of a kind
+          Photo_url:
+            type: string
+            example: 'http://examplephoto.com'
+          Country:
+            type: string 
+            example: Portugal
+          City:
+            type: string
+            example: Lisbon
+          Average_budget: 
+            type: number
+            example: 800
+          Trip_date:
+            type: string
+            example: '2023-8-1'
+          Accomdation_fees:
+            type: number
+            example: 300.00
+          travel_fees:
+            type: number
+            example: 300.00
+          tour_fees:
+            type: number
+            example: 300.00
+          
+           
+    object-trips:
+      type: object
+      properties:
+          Trip_description: 
+            type: string
+            example: hello this trip is one of a kind
+          Photo_url:
+            type: string
+            example: 'http://examplephoto.com'
+          Country:
+            type: string 
+            example: Portugal
+          City:
+            type: string
+            example: Lisbon
+          Average_budget: 
+            type: number
+            example: 800
+          Trip_date:
+            type: string
+            example: '2023-8-1'
+          Accomdation_fees:
+            type: number
+            example: 300.00
+          travel_fees:
+            type: number
+            example: 300.00
+          tour_fees:
+            type: number
+            example: 300.00
+
+    object-admin:
+      type: object
+      properties:
+          Username: 
+            type: string
+            example: farida
+          Password:
+            type: string
+            example: ff7878
+        
+          
